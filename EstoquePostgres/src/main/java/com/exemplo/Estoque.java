@@ -9,8 +9,14 @@ import java.util.Scanner;
 
 public class Estoque {
 
+    private static String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
+    private static String usuario = "postgres";
+    private static String senha = "1234";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+
 
         do {
             exibirMenu();
@@ -60,9 +66,9 @@ public class Estoque {
     private static boolean codigoItemExistente(int codigoItem) {
         // Verificar se o código do item existe na tabela de produtos
         // Configurações do banco de dados
-        String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        String usuario = "postgres";
-        String senha = "1234";
+        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
+        //String usuario = "postgres";
+        //String senha = "1234";
 
 
         try {
@@ -126,9 +132,9 @@ public class Estoque {
 
     private static void realizarMovimentacao(int codigoItem, String tipo, double valorUnitario, int quantidade) {
         // Configurações do banco de dados
-        String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        String usuario = "postgres";
-        String senha = "1234";
+        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
+        //String usuario = "postgres";
+        //String senha = "1234";
 
         try {
             // Conectar ao banco de dados
@@ -161,9 +167,9 @@ public class Estoque {
     }
     private static void cadastrarNovoItem(Scanner scanner) {
         // Configurações do banco de dados
-        String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        String usuario = "postgres";
-        String senha = "1234";
+        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
+        //String usuario = "postgres";
+        //String senha = "1234";
 
         try {
             // Conectar ao banco de dados
@@ -221,9 +227,9 @@ public class Estoque {
 
     private static void listarItensCadastrados() {
         // Configurações do banco de dados
-        String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        String usuario = "postgres";
-        String senha = "1234";
+        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
+        //String usuario = "postgres";
+        //String senha = "1234";
 
 
         try {
