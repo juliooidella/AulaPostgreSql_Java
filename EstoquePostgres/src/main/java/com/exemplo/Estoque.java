@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Estoque {
+public class Demostracao {
 
-    private static String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-    private static String usuario = "postgres";
-    private static String senha = "1234";
+    private static String url = "jdbc:postgresql://127.0.0.1:porta_do_seu_banco/seu_banco_de_dados";
+    private static String usuario = "usuario_do_banco";
+    private static String senha = "senha_do_banco";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -66,10 +66,6 @@ public class Estoque {
     private static boolean codigoItemExistente(int codigoItem) {
         // Verificar se o código do item existe na tabela de produtos
         // Configurações do banco de dados
-        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        //String usuario = "postgres";
-        //String senha = "1234";
-
 
         try {
             // Conectar ao banco de dados
@@ -77,7 +73,7 @@ public class Estoque {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
 
             // Consulta para verificar se o código do item existe
-            String sql = "SELECT id FROM produtos WHERE id = ?";
+            String sql = "SELECT id FROM itens WHERE id = ?";
             try (PreparedStatement statement = conexao.prepareStatement(sql)) {
                 statement.setInt(1, codigoItem);
                 ResultSet resultSet = statement.executeQuery();
@@ -132,9 +128,6 @@ public class Estoque {
 
     private static void realizarMovimentacao(int codigoItem, String tipo, double valorUnitario, int quantidade) {
         // Configurações do banco de dados
-        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        //String usuario = "postgres";
-        //String senha = "1234";
 
         try {
             // Conectar ao banco de dados
@@ -143,9 +136,6 @@ public class Estoque {
 
             // Inserir dados na tabela mov_estoque
             inserirMovimentacao(conexao, codigoItem, tipo, valorUnitario, quantidade);
-
-            // Atualizar o estoque na tabela produtos
-            //atualizarEstoque(conexao, codigoItem, tipo, quantidade);
 
             // Fechar recursos
             conexao.close();
@@ -156,7 +146,7 @@ public class Estoque {
     }
 
     private static void inserirMovimentacao(Connection conexao, int codigoItem, String tipo, double valorUnitario, int quantidade) throws SQLException {
-        String sql = "INSERT INTO mov_estoque (codigo_item, tipo, valor_unitario, quantidade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO mov_estoque (codigo_item, tipo, valor_unitario, quantidade * 11) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setInt(1, codigoItem);
             statement.setString(2, tipo);
@@ -166,10 +156,7 @@ public class Estoque {
         }
     }
     private static void cadastrarNovoItem(Scanner scanner) {
-        // Configurações do banco de dados
-        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        //String usuario = "postgres";
-        //String senha = "1234";
+
 
         try {
             // Conectar ao banco de dados
@@ -226,18 +213,12 @@ public class Estoque {
     }
 
     private static void listarItensCadastrados() {
-        // Configurações do banco de dados
-        //String url = "jdbc:postgresql://127.0.0.1:5433/SENAI";
-        //String usuario = "postgres";
-        //String senha = "1234";
-
-
         try {
             // Conectar ao banco de dados
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
 
             // Consulta para obter todos os itens cadastrados
-            String sql = "SELECT * FROM produtos";
+            String sql = "SELECT * FROM itens";
             try (PreparedStatement statement = conexao.prepareStatement(sql)) {
                 ResultSet resultSet = statement.executeQuery();
 
@@ -266,7 +247,7 @@ public class Estoque {
     }
 
     private static void inserirProduto(Connection conexao, String nome, double preco, String categoria, String unidade, String nroCodBar, double pesoBruto) throws SQLException {
-        String sql = "INSERT INTO produtos (nome, preco, categoria,  unidade, nrocodbar, pesobruto) VALUES ( ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produtos (nome, preco, categoria,  uni, numerocodbar, pesbruto) VALUES ( ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setString(1, nome);
             statement.setDouble(2, preco);
