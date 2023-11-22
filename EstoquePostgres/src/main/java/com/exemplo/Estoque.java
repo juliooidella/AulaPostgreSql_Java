@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Demostracao {
+public class Estoque {
 
     private static String url = "jdbc:postgresql://127.0.0.1:porta_do_seu_banco/seu_banco_de_dados";
     private static String usuario = "usuario_do_banco";
